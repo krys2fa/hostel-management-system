@@ -1,9 +1,11 @@
 # Hostel Management System - Project Documentation
 
 ## Overview
+
 This project is a comprehensive hostel management system built for educational institutions to manage students, staff, facilities, payroll, accounting, SMS communications, leave requests, and reporting. It includes a student self-service portal for enhanced user experience.
 
 ## Tech Stack
+
 - **Frontend**: Next.js 14 (App Router), Tailwind CSS
 - **Backend**: Next.js API Routes
 - **Database**: Neon (PostgreSQL), Prisma ORM
@@ -15,6 +17,7 @@ This project is a comprehensive hostel management system built for educational i
 ## Core Features
 
 ### 1. Student Management
+
 - Student registration and profile management
 - Room assignment and allocation
 - Payment tracking and billing
@@ -22,36 +25,42 @@ This project is a comprehensive hostel management system built for educational i
 - Check-in/check-out management
 
 ### 2. Staff Management
+
 - Staff registration and profile management
 - Role-based access control (Admin, Manager, Staff)
 - Attendance tracking
 - Performance management
 
 ### 3. Facility Management
+
 - Room inventory and maintenance tracking
 - Facility booking and scheduling
 - Maintenance request handling
 - Asset management
 
 ### 4. Payroll & Accounting Management
+
 - Salary calculation and processing
 - Expense tracking
 - Payment processing integration
 - Financial reporting
 
 ### 5. SMS Management
+
 - Automated SMS notifications for payments, maintenance, events
 - Bulk messaging capabilities
 - SMS templates and scheduling
 - Delivery status tracking
 
 ### 6. Leave Management
+
 - Student leave request system
 - Staff leave management
 - Approval workflows
 - Leave balance tracking
 
 ### 7. Detailed Reporting
+
 - Occupancy trends analysis
 - Payment defaulters identification
 - Staff attendance reports
@@ -59,6 +68,7 @@ This project is a comprehensive hostel management system built for educational i
 - Custom report generation
 
 ### 8. Student Self-Service Portal
+
 - Room assignment viewing
 - Payment history access
 - Maintenance request submission
@@ -66,6 +76,7 @@ This project is a comprehensive hostel management system built for educational i
 - Profile management
 
 ## Additional Features
+
 - **Notifications**: Email and in-app notifications
 - **Inventory Management**: Hostel supplies and equipment tracking
 - **Event Management**: Hostel events and announcements
@@ -337,11 +348,13 @@ enum ReportType {
 ## API Endpoints
 
 ### Authentication
+
 - `POST /api/auth/login` - User login
 - `POST /api/auth/register` - User registration
 - `POST /api/auth/logout` - User logout
 
 ### Students
+
 - `GET /api/students` - List all students
 - `POST /api/students` - Create new student
 - `GET /api/students/[id]` - Get student details
@@ -349,6 +362,7 @@ enum ReportType {
 - `DELETE /api/students/[id]` - Delete student
 
 ### Staff
+
 - `GET /api/staff` - List all staff
 - `POST /api/staff` - Create new staff
 - `GET /api/staff/[id]` - Get staff details
@@ -356,22 +370,26 @@ enum ReportType {
 - `DELETE /api/staff/[id]` - Delete staff
 
 ### Rooms
+
 - `GET /api/rooms` - List all rooms
 - `POST /api/rooms` - Create new room
 - `GET /api/rooms/[id]` - Get room details
 - `PUT /api/rooms/[id]` - Update room
 
 ### Payments
+
 - `GET /api/payments` - List all payments
 - `POST /api/payments` - Create new payment
 - `GET /api/payments/[id]` - Get payment details
 - `PUT /api/payments/[id]` - Update payment
 
 ### SMS
+
 - `POST /api/sms/send` - Send SMS
 - `GET /api/sms/history` - Get SMS history
 
 ### Reports
+
 - `GET /api/reports` - List available reports
 - `POST /api/reports/generate` - Generate report
 - `GET /api/reports/[id]` - Get report data
@@ -379,7 +397,9 @@ enum ReportType {
 ## 2-Week Development Roadmap
 
 ### Week 1: Foundation & Core Setup
+
 **Day 1-2: Project Setup & Authentication**
+
 - Initialize Next.js project with TypeScript
 - Set up Tailwind CSS
 - Configure Prisma with Neon database
@@ -387,12 +407,14 @@ enum ReportType {
 - Create basic user roles and permissions
 
 **Day 3-4: Database Schema & Basic CRUD**
+
 - Define and migrate Prisma schema
 - Create API routes for basic CRUD operations
 - Implement user management (students, staff)
 - Set up room and facility management
 
 **Day 5-7: Core Features Implementation**
+
 - Student management module
 - Staff management module
 - Room assignment functionality
@@ -400,19 +422,23 @@ enum ReportType {
 - Leave request system
 
 ### Week 2: Advanced Features & Testing
+
 **Day 8-10: Advanced Features**
+
 - Payroll and accounting management
 - SMS integration with Arkesel
 - Reporting system (basic reports)
 - Student self-service portal
 
 **Day 11-12: UI/UX & Template Integration**
+
 - Convert Dattaable template to Next.js components
 - Implement responsive dashboard layouts
 - Add data visualization components
 - Polish user interfaces
 
 **Day 13-14: Testing & Deployment**
+
 - Write unit tests with Jest
 - Implement E2E tests with Playwright
 - Performance optimization
@@ -422,12 +448,14 @@ enum ReportType {
 ## Testing Strategy
 
 ### Unit Tests (Jest)
+
 - Component testing
 - Utility function testing
 - API route testing
 - Database model testing
 
 ### E2E Tests (Playwright)
+
 - User authentication flow
 - Student registration and management
 - Payment processing
@@ -437,18 +465,21 @@ enum ReportType {
 ## Deployment & Infrastructure
 
 ### Vercel Deployment
+
 - Automatic deployments from GitHub
 - Environment variable management
 - Domain configuration
 - Performance monitoring
 
 ### Neon Database
+
 - Serverless PostgreSQL
 - Automatic scaling
 - Built-in backup and recovery
 - Connection pooling
 
 ### Arkesel SMS Integration
+
 - API key configuration
 - SMS template management
 - Delivery tracking
@@ -457,22 +488,26 @@ enum ReportType {
 ## Pricing & Cost Estimation
 
 ### Development Costs
+
 - **Developer Time**: 2 weeks × 40 hours/week × $50/hour = $4,000
 - **Design/Mockups**: $500 (if outsourced)
 - **Total Development**: ~$4,500
 
 ### Infrastructure Costs (Monthly)
+
 - **Vercel**: Free tier (up to 100GB bandwidth, suitable for MVP)
 - **Neon**: Free tier (512MB storage, 100 hours compute time)
 - **Arkesel SMS**: ~$0.05 per SMS (depending on volume)
 - **Domain**: ~$10-20/year
 
 ### Operational Costs
+
 - **Maintenance**: 10-20% of development cost annually
 - **SMS Costs**: Variable based on usage (e.g., 1000 SMS/month = $50)
 - **Database Scaling**: As needed when exceeding free tiers
 
 ## Security Considerations
+
 - JWT-based authentication
 - Role-based access control
 - Input validation and sanitization
@@ -482,6 +517,7 @@ enum ReportType {
 - Regular security audits
 
 ## Performance Optimization
+
 - Database query optimization
 - Image optimization
 - Code splitting
@@ -489,6 +525,7 @@ enum ReportType {
 - CDN integration
 
 ## Future Enhancements
+
 - Mobile app development
 - AI-powered analytics
 - Integration with learning management systems
@@ -497,4 +534,5 @@ enum ReportType {
 - Blockchain-based payment verification
 
 ## Conclusion
+
 This hostel management system provides a comprehensive solution for educational institutions to efficiently manage their accommodation facilities. The 2-week timeline focuses on delivering core functionality with room for future enhancements. The chosen tech stack ensures scalability, maintainability, and cost-effectiveness.

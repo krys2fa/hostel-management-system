@@ -1,0 +1,265 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  role      Role
+  profile   Profile?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Profile {
+  id        String   @id @default(cuid())
+  userId    String   @unique
+  firstName String
+  lastName  String
+  phone     String?
+  address   String?
+  user      User     @relation(fields: [userId], references: [id])
+}
+
+model Student {
+  id            String        @id @default(cuid())
+  userId        String        @unique
+  studentId     String        @unique
+  roomId        String?
+  enrollmentDate DateTime
+  graduationDate DateTime?
+  status        StudentStatus
+  payments      Payment[]
+  leaveRequests LeaveRequest[]
+  maintenanceRequests MaintenanceRequest[]
+  user          User          @relation(fields: [userId], references: [id])
+  room          Room?         @relation(fields: [roomId], references: [id])
+}
+
+model Staff {
+  id            String        @id @default(cuid())
+  userId        String        @unique
+  employeeId    String        @unique
+  department    String
+  position      String
+  salary        Float
+  hireDate      DateTime
+  status        StaffStatus
+  attendance    Attendance[]
+  leaveRequests LeaveRequest[]
+  payrolls      Payroll[]
+  user          User          @relation(fields: [userId], references: [id])
+}
+
+model Room {
+  id          String     @id @default(cuid())
+  roomNumber  String     @unique
+  capacity    Int
+  type        RoomType
+  status      RoomStatus
+  floor       String
+  building    String
+  students    Student[]
+  facilities  Facility[]
+}
+
+model Facility {
+  id          String        @id @default(cuid())
+  name        String
+  description String?
+  roomId      String
+  status      FacilityStatus
+  room        Room          @relation(fields: [roomId], references: [id])
+}
+
+model Payment {
+  id          String        @id @default(cuid())
+  studentId   String
+  amount      Float
+  type        PaymentType
+  status      PaymentStatus
+  dueDate     DateTime
+  paidDate    DateTime?
+  description String?
+  student     Student       @relation(fields: [studentId], references: [id])
+}
+
+model Payroll {
+  id        String   @id @default(cuid())
+  staffId   String
+  amount    Float
+  period    String
+  status    PayrollStatus
+  paidDate  DateTime?
+  staff     Staff    @relation(fields: [staffId], references: [id])
+}
+
+model Attendance {
+  id        String            @id @default(cuid())
+  staffId   String
+  date      DateTime
+  checkIn   DateTime?
+  checkOut  DateTime?
+  status    AttendanceStatus
+  staff     Staff             @relation(fields: [staffId], references: [id])
+}
+
+model LeaveRequest {
+  id          String       @id @default(cuid())
+  requesterId String
+  type        LeaveType
+  startDate   DateTime
+  endDate     DateTime
+  reason      String
+  status      RequestStatus
+  requester   User         @relation(fields: [requesterId], references: [id])
+}
+
+model MaintenanceRequest {
+  id          String       @id @default(cuid())
+  studentId   String
+  roomId      String
+  description String
+  priority    Priority
+  status      RequestStatus
+  createdAt   DateTime     @default(now())
+  student     Student      @relation(fields: [studentId], references: [id])
+  room        Room         @relation(fields: [roomId], references: [id])
+}
+
+model SMSMessage {
+  id          String      @id @default(cuid())
+  recipient   String
+  message     String
+  status      SMSStatus
+  sentAt      DateTime?
+  type        SMSType
+}
+
+model Report {
+  id          String     @id @default(cuid())
+  name        String
+  type        ReportType
+  parameters  Json
+  generatedAt DateTime   @default(now())
+  data        Json
+}
+
+enum Role {
+  ADMIN
+  MANAGER
+  STAFF
+  STUDENT
+}
+
+enum StudentStatus {
+  ACTIVE
+  INACTIVE
+  GRADUATED
+  SUSPENDED
+}
+
+enum StaffStatus {
+  ACTIVE
+  INACTIVE
+  TERMINATED
+}
+
+enum RoomType {
+  SINGLE
+  DOUBLE
+  TRIPLE
+  DORMITORY
+}
+
+enum RoomStatus {
+  AVAILABLE
+  OCCUPIED
+  MAINTENANCE
+  UNAVAILABLE
+}
+
+enum FacilityStatus {
+  WORKING
+  BROKEN
+  MAINTENANCE
+}
+
+enum PaymentType {
+  TUITION
+  ACCOMMODATION
+  FEES
+  OTHER
+}
+
+enum PaymentStatus {
+  PENDING
+  PAID
+  OVERDUE
+  CANCELLED
+}
+
+enum PayrollStatus {
+  PENDING
+  PROCESSED
+  PAID
+}
+
+enum AttendanceStatus {
+  PRESENT
+  ABSENT
+  LATE
+  HALF_DAY
+}
+
+enum LeaveType {
+  ANNUAL
+  SICK
+  EMERGENCY
+  MATERNITY
+  STUDY
+}
+
+enum RequestStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  CANCELLED
+}
+
+enum Priority {
+  LOW
+  MEDIUM
+  HIGH
+  URGENT
+}
+
+enum SMSStatus {
+  SENT
+  DELIVERED
+  FAILED
+}
+
+enum SMSType {
+  PAYMENT_REMINDER
+  MAINTENANCE_UPDATE
+  EVENT_NOTIFICATION
+  GENERAL
+}
+
+enum ReportType {
+  OCCUPANCY
+  PAYMENT_DEFAULTERS
+  STAFF_ATTENDANCE
+  EXPENSE_BREAKDOWN
+  CUSTOM
+}
