@@ -55,12 +55,37 @@ A comprehensive hostel management system built with Next.js, Tailwind CSS, Prism
    ```bash
    npx prisma migrate dev
    npx prisma generate
+   npm run db:seed
    ```
 
 5. Run the development server:
    ```bash
    npm run dev
    ```
+
+### Seeded Data & Login Credentials
+
+After running the seed script, the following test accounts will be available for login:
+
+- **Admin**: `admin@hostel.edu` / `admin123`
+- **Manager**: `manager@hostel.edu` / `manager123`
+- **Staff**: `staff1@hostel.edu` / `staff123`
+- **Staff**: `staff2@hostel.edu` / `staff123`
+- **Student**: `student1@hostel.edu` / `student123`
+- **Student**: `student2@hostel.edu` / `student123`
+- **Student**: `student3@hostel.edu` / `student123`
+
+The seed data includes:
+
+- 7 users with different roles
+- 4 rooms with various statuses
+- 6 facilities across rooms
+- 4 payment records
+- 4 attendance records
+- 2 payroll records
+- 2 maintenance requests
+- 2 leave requests
+- 2 SMS messages
 
 ### Testing
 
